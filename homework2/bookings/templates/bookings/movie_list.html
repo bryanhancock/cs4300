@@ -1,0 +1,31 @@
+{% extends 'bookings/base.html' %}
+{% block title %}Now Showing{% endblock %}
+{% block content %}
+<div class="hero rounded-3 mb-4 text-center">
+    <h1 class="display-5 fw-bold">🎬 Now Showing</h1>
+    <p class="lead">Book your seats for the latest movies</p>
+</div>
+{% if movies %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for movie in movies %}
+    <div class="col">
+        <div class="card h-100 shadow">
+            <div class="card-body">
+                <h5 class="card-title fw-bold">{{ movie.title }}</h5>
+                <p class="card-text text-secondary">{{ movie.description }}</p>
+                <p class="card-text"><small><i class="bi bi-calendar"></i> {{ movie.release_date }} &nbsp; <i class="bi bi-clock"></i> {{ movie.duration }} min</small></p>
+            </div>
+            <div class="card-footer">
+                <a href="/book/{{ movie.id }}/" class="btn btn-primary w-100">Book Now</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="text-center mt-5">
+    <h3 class="text-secondary">No movies available yet.</h3>
+    <a href="/admin/" class="btn btn-outline-danger mt-3">Add Movies via Admin</a>
+</div>
+{% endif %}
+{% endblock %}
